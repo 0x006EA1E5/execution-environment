@@ -136,12 +136,9 @@ class ExecutionEnvironmentTest {
         Set<ExecutionEnvironment> executionEnvironments = ExecutionEnvironmentTest.genExecutionEnvoronments(20, 20);
         for (int i = 0; i < runs; i++) {
             Map<EventType, Set<ExecutionEnvironment>> collect = executionEnvironments.stream()
-                        .reduce(
-                                new HashMap<EventType, Set<ExecutionEnvironment>>(),
-                                toEnvToEventTypeMap().accumulatorFn(),
-                                toEnvToEventTypeMap().combiner()
-                        );
+                        .reduce(new HashMap<>(), toEnvToEventTypeMap().accumulatorFn(), toEnvToEventTypeMap().combiner());
 //                    .collect(toEnvToEventTypeMap());
+//                    .collect(toConcurrentEnvToEventTypeMap());
 //            if (collect.size() != 400)
 //                fail();
         }
